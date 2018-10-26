@@ -9,7 +9,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 
 // const env = require('../config/prod.env')
 const env = require('../config/'+process.env.env_config+'.env')
@@ -33,7 +34,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
-    new UglifyJsPlugin({
+    /*new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
           warnings: false,
@@ -43,6 +44,20 @@ const webpackConfig = merge(baseWebpackConfig, {
       },
       sourceMap: config.build.productionSourceMap,
       parallel: true
+    }),*/
+    // 增加 webpack-parallel-uglify-plugin来替换
+    new ParallelUglifyPlugin({
+      cacheDir: '.cache/',
+      uglifyJS:{
+        output: {
+          comments: false
+        },
+        compress: {
+          warnings: false,
+          drop_debugger: true, // 去除生产环境的 debugger 和 console.log
+          drop_console: true
+        }
+      }
     }),
     // extract css into its own file
     new ExtractTextPlugin({
