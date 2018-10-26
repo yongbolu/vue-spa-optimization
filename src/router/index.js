@@ -1,9 +1,9 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 import Router from 'vue-router'
 
 import Layout from '@/views/layout'
 import SinglePages from './singlePages' // 单页面模块 login、register/lock.....
-Vue.use(Router)
+// Vue.use(Router)
 
 /** 路由配置项目
  * hidden: true                   当设置 true 的时候该路由不会再侧边栏出现 如401，login等页面(默认 false)
