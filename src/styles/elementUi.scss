@@ -1,0 +1,11 @@
+/* 重写 ele 的原本样式 */
+#app {
+  // table 组件
+  .el-table{
+    .el-table__row{  // 表格td内文字操作按钮  <el-button type="mini" type="text" icon="el-icon-delete">
+      .el-button--text.el-button--mini{
+        font-size: 14px;
+      }
+    }
+  }
+}

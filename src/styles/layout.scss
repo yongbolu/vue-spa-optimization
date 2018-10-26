@@ -1,0 +1,13 @@
+/*布局的全局样式*/
+
+// 顶部工具栏样式
+.top-toolbar{
+  display: flex;
+  justify-content: space-between;
+}
+
+// 底部行
+.bottom-row{
+  text-align:right;
+  margin-top: 20px;
+}
