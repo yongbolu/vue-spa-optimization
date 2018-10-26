@@ -3,6 +3,7 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const webpack = require('webpack')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -95,5 +96,15 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
     child_process: 'empty'
-  }
+  },
+  plugins: [
+    new webpack.DllReferencePlugin({
+      // name参数和dllplugin里面name一致，可以不传
+      name: 'vendor',
+      // dllplugin 打包输出的manifest.json
+      manifest: require('../vendor.manifest.json'),
+      // 和dllplugin里面的context一致
+      context: path.join(__dirname, '..')
+    })
+  ]
 }
